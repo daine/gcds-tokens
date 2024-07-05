@@ -26,7 +26,7 @@ jobs:
       
       - name: Slack notify on release and publish
         env: 
-          VERSION: $(jq -r '.version' package.json)
+          VERSION: ${{ (jq -r '.version' package.json) }}
         run: |
          json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v${{ VERSION }}|${{steps.publish.outputs.id}}>*"}'
          echo "$json"
