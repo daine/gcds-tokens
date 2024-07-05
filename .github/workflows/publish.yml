@@ -26,10 +26,10 @@ jobs:
       
       - name: Slack notify on release and publish
         run: |
-         v1=$(jq -r '.version' package.json)
-         echo "The version is $v1"
-         echo 'version is '$v1
-         json=$(jq -n --arg version "$VERSION" '{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v'$VERSION')|${{steps.publish.outputs.id}}>*"}'
+         VERSION=$(jq -r '.version' package.json)
+         echo "The version is $VERSION"
+         echo 'version is '$VERSION
+         json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v'$VERSION'|${{steps.publish.outputs.id}}>*"}'
          echo "$json"
 
       # - name: Publish
