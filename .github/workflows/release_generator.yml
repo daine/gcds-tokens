@@ -1,24 +1,24 @@
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-permissions:
-  contents: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   pull-requests: write
 
-name: Release Generator
+# name: Release Generator
 
-jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/create-github-app-token@c8f55efbd427e7465d6da1106e7979bc8aaee856 # v1.10.1
-        id: sre_app_token
-        with:
-          app_id: ${{ secrets.SRE_APP_ID }}
-          private_key: ${{ secrets.SRE_APP_PRIVATE_KEY }}
+# jobs:
+#   release-please:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/create-github-app-token@c8f55efbd427e7465d6da1106e7979bc8aaee856 # v1.10.1
+#         id: sre_app_token
+#         with:
+#           app_id: ${{ secrets.SRE_APP_ID }}
+#           private_key: ${{ secrets.SRE_APP_PRIVATE_KEY }}
 
-      - uses: google-github-actions/release-please-action@e4dc86ba9405554aeba3c6bb2d169500e7d3b4ee # v4.1.1
-        with:
-          token: ${{ steps.sre_app_token.outputs.token }}
+#       - uses: google-github-actions/release-please-action@e4dc86ba9405554aeba3c6bb2d169500e7d3b4ee # v4.1.1
+#         with:
+#           token: ${{ steps.sre_app_token.outputs.token }}
