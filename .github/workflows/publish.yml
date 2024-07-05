@@ -25,9 +25,8 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       
       - name: Slack notify on release and publish
-        env: 
-          VERSION: ${{ (jq -r '.version' package.json) }}
         run: |
+         VERSION=$(jq -r '.version' data.json)
          json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v${{ VERSION }}|${{steps.publish.outputs.id}}>*"}'
          echo "$json"
 
