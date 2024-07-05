@@ -28,7 +28,8 @@ jobs:
         run: |
          v1=$(jq -r '.version' package.json)
          echo "The version is $v1"
-         json=$(jq -n --arg version "$VERSION" '{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v\($VERSION)|${{steps.publish.outputs.id}}>*"}'
+         echo 'version is '$v1
+         json=$(jq -n --arg version "$VERSION" '{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v'$VERSION')|${{steps.publish.outputs.id}}>*"}'
          echo "$json"
 
       # - name: Publish
