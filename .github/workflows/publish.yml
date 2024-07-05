@@ -23,6 +23,13 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      
+      - name: Slack notify on release and publish
+        env: 
+          VERSION: $(jq -r '.version' package.json)
+        run: |
+         json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v${{ VERSION }}|${{steps.publish.outputs.id}}>*"}'
+         echo "$json"
 
       # - name: Publish
       #   uses: JS-DevTools/npm-publish@52bacc14a33500e8dcf0afe1bff552d638216212
@@ -78,9 +85,3 @@ jobs:
       #     json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v${{ VERSION }}|${{steps.publish.outputs.id}}>*"}'
       #     curl -X POST -H 'Content-type: application/json' --data "$json" ${{ secrets.SLACK_WEBHOOK_DSNDEV }}
           
-      - name: Slack notify on release and publish
-       env: 
-         VERSION: $(jq -r '.version' package.json)
-       run: |
-         json='{"text":"🚀 New release available! @cdssnc/gcds-tokens *version <https://github.com/cds-snc/gcds-tokens/releases/tag/gcds-tokens-v${{ VERSION }}|${{steps.publish.outputs.id}}>*"}'
-         echo "$json"
